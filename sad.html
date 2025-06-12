@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sad Kitty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Playfair Display", serif;
+        background: url("https://media1.tenor.com/m/m3A4-216JFAAAAAd/bard1a-sad-cat.gif")
+          no-repeat center center/cover;
+        color: white;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        z-index: 1;
+      }
+
+      .overlay h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .overlay p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .overlay button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 2rem;
+        border: none;
+        cursor: pointer;
+        background-color: #ff4da6;
+        color: white;
+        transition: all 0.3s ease;
+      }
+
+      .overlay button:hover {
+        transform: scale(1.1);
+      }
+
+      .petal {
+        position: fixed;
+        top: -10px;
+        width: 20px;
+        height: 20px;
+        background: url("https://pngimg.com/uploads/rose/rose_PNG66214.png")
+          no-repeat center/contain;
+        animation: fall linear infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Petal Animation -->
+    <script>
+      function createPetal() {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = Math.random() * 3 + 3 + "s";
+        document.body.appendChild(petal);
+        setTimeout(() => petal.remove(), 5000);
+      }
+      setInterval(createPetal, 400);
+    </script>
+
+    <div class="overlay">
+      <h1>😿 Even kitty is sad...</h1>
+      <p>But something magical might still happen...</p>
+      <button onclick="startSurprise()">💔 I feel sad too...</button>
+    </div>
+
+    <!-- Corrected Audio Tag -->
+    <audio id="bg-music" loop preload="auto">
+      <source src="audio/sad-music.mp3" type="audio/mp3" />
+      Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+      const music = document.getElementById("bg-music");
+
+      // Triggered on first click anywhere
+      document.addEventListener(
+        "click",
+        () => {
+          try {
+            music.muted = false;
+            music.currentTime = 0;
+            music
+              .play()
+              .then(() => {
+                console.log("Autoplay success");
+              })
+              .catch((err) => {
+                console.error("Autoplay blocked:", err);
+              });
+          } catch (err) {
+            console.error("Click play error:", err);
+          }
+        },
+        { once: true }
+      );
+
+      // Triggered on button click
+      function startSurprise() {
+        try {
+          music.muted = false;
+          music.currentTime = 0;
+          music
+            .play()
+            .then(() => {
+              console.log("Music started from button");
+            })
+            .catch((err) => {
+              console.error("Play failed from button:", err);
+            });
+
+          setTimeout(() => {
+            window.location.href = "surprise.html";
+          }, 10000);
+        } catch (err) {
+          console.error("startSurprise error:", err);
+        }
+      }
+    </script>
+  </body>
+</html>
