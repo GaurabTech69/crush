@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Crush?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #1b0033;
+      background-image: url('https://i.pinimg.com/originals/df/e6/30/dfe63054cdb9c1956182ff84b5793d8f.gif');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons button {
+      margin: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 2rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .yes { background: #ff4da6; color: white; }
+    .maybe { background: #8a2be2; color: white; }
+    .no { background: #333; color: #ccc; }
+
+    button:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://i.gifer.com/QG1k.gif') no-repeat center center/contain;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+  <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
+  <div class="heart" style="left: 70%; animation-delay: 1s;"></div>
+  <div class="heart" style="left: 90%; animation-delay: 3s;"></div>
+
+  <div class="container">
+    <h1>Will You Be My Crush? 💖</h1>
+    <p>You’ve always made my heart beat faster…</p>
+    <div class="buttons">
+      <button class="yes" onclick="playHeartbeatThenGo('yes.html')">💖 Say Yes</button>
+      <button class="maybe" onclick="location.href='maybe.html'">🤔 Need Time</button>
+      <button class="no" onclick="location.href='sad.html'">😿 Not Yet</button>
+    </div>
+  </div>
+
+  <!-- Background music -->
+<audio id="bg-music" loop muted>
+  <source src="audio/sad-music.mp3" type="audio/mp3">
+</audio>
+
+
+  <!-- Heartbeat sound -->
+  <audio id="heartbeat-sfx">
+    <source src="https://www.soundjay.com/human/heartbeat-01.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // Enable background music on first interaction
+    document.addEventListener('click', () => {
+      const music = document.getElementById('bg-music');
+      if (music.paused) {
+        music.muted = false;
+        music.play().catch(() => {});
+      }
+    });
+
+    function playHeartbeatThenGo(targetPage) {
+      const sfx = document.getElementById('heartbeat-sfx');
+      sfx.play().catch(() => {});
+      setTimeout(() => {
+        window.location.href = targetPage;
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
