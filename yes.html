@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yes!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+<style>
+  body {
+    background: url('https://i.pinimg.com/originals/b0/18/5b/b0185b5a4994e05cfcd6f85a25c64743.gif') no-repeat center center/cover;
+    font-family: 'Playfair Display', serif;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin: 0;
+  }
+  .container {
+    background-color: rgba(0,0,0,0.6);
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 10vh auto;
+    max-width: 700px;
+  }
+</style>
+
+  
+<style>
+  .petal {
+    position: fixed;
+    top: -10px;
+    width: 20px;
+    height: 20px;
+    background: url('https://pngimg.com/uploads/rose/rose_PNG66214.png') no-repeat center/contain;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 10;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
+<script>
+  function createPetal() {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = (Math.random() * 3 + 3) + 's';
+    document.body.appendChild(petal);
+    setTimeout(() => {
+      petal.remove();
+    }, 5000);
+  }
+  setInterval(createPetal, 500);
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <h1>💖 You said YES! My heart is yours!</h1>
+    <p>I can't wait for our beautiful journey together.</p>
+    <button class="yes" onclick="location.href='index.html'">🔁 Back</button>
+  </div>
+  
+<audio id="bg-music" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+<audio id="heartbeat" preload="auto">
+  <source src="https://www.soundjay.com/human/heartbeat-01.mp3" type="audio/mp3">
+</audio>
+<script>
+  document.querySelector('.yes')?.addEventListener('click', () => {
+    document.getElementById('heartbeat').play();
+  });
+</script>
+
+</body>
+</html>
